@@ -1,12 +1,12 @@
-package ru.itmentor.spring.boot_security.demo.user;
+package ru.itmentor.spring.boot_security.demo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.itmentor.spring.boot_security.demo.role.Role;
-import ru.itmentor.spring.boot_security.demo.role.RoleEnum;
+import ru.itmentor.spring.boot_security.demo.dto.RoleDto;
+import ru.itmentor.spring.boot_security.demo.dto.UserDto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -121,7 +121,7 @@ public class User implements Serializable, UserDetails {
         this.roles = roles;
     }
 
-    public void setRoles(Collection<RoleEnum> roles) {
+    public void setRoles(Collection<RoleDto> roles) {
         this.roles.clear();
         roles.forEach(re -> this.roles.add(new Role(re)));
     }

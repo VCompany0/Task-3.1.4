@@ -1,45 +1,31 @@
 package ru.itmentor.spring.boot_security.demo.web.controller;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import ru.itmentor.spring.boot_security.demo.repositories.RoleRepository;
+import ru.itmentor.spring.boot_security.demo.dto.RoleDto;
+import ru.itmentor.spring.boot_security.demo.dto.UserDto;
+import ru.itmentor.spring.boot_security.demo.model.Role;
+import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
-import ru.itmentor.spring.boot_security.demo.role.Role;
-import ru.itmentor.spring.boot_security.demo.role.RoleEnum;
-import ru.itmentor.spring.boot_security.demo.user.User;
-import ru.itmentor.spring.boot_security.demo.user.UserDto;
 
-import java.util.*;
-
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class AdminController {
 
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
-
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
-
     @GetMapping(value = "/admin/all_users")
     public ResponseEntity<List<UserDto>> allUsers() {
         List<UserDto> userList = new LinkedList<>();
@@ -56,16 +42,6 @@ public class AdminController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return new UserDto(userRepository.findByName(authentication.getName()));
     }
-//
-//    @GetMapping("/admin/addUser")
-//    public String addUser(Model model) {
-//        // create model attribute to bind form data
-//        UserDto user = new UserDto();
-//        model.addAttribute("user", user);
-//
-//        model.addAttribute("currentUser", getCurrentUser());
-//        return "add_user";
-//    }
 
     @RequestMapping(value = "/admin/updateUser", method = RequestMethod.POST)
     public ResponseEntity<String> updateUser(@RequestBody UserDto user) {
@@ -96,7 +72,7 @@ public class AdminController {
         if (presentUser == null) {
             presentUser = new User(user);
             if(presentUser.getRoles().isEmpty()){
-                presentUser.setRoles(Set.of(new Role(RoleEnum.ROLE_USER)));
+                presentUser.setRoles(Set.of(new Role(RoleDto.ROLE_USER)));
             }
             userRepository.save(presentUser);
         } else {

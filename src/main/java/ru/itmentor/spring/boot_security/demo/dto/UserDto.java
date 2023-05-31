@@ -1,6 +1,6 @@
-package ru.itmentor.spring.boot_security.demo.user;
+package ru.itmentor.spring.boot_security.demo.dto;
 
-import ru.itmentor.spring.boot_security.demo.role.RoleEnum;
+import ru.itmentor.spring.boot_security.demo.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,20 +15,20 @@ public class UserDto {
     private int age;
 
     private String password;
-    private List<RoleEnum> roles = new ArrayList<>();
+    private List<RoleDto> roles = new ArrayList<>();
 
     public UserDto(User user){
         this.id = user.getId();
         this.name = user.getName();
         this.email = user.getEmail();
         this.age = user.getAge();
-        user.getRoles().forEach(role -> this.roles.add(RoleEnum.valueOf(role.getRole())));
+        user.getRoles().forEach(role -> this.roles.add(RoleDto.valueOf(role.getRole())));
     }
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String name, String email, int age, String password, List<RoleEnum> roles) {
+    public UserDto(Long id, String name, String email, int age, String password, List<RoleDto> roles) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -77,11 +77,11 @@ public class UserDto {
         this.password = password;
     }
 
-    public List<RoleEnum> getRoles() {
+    public List<RoleDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RoleEnum> roles) {
+    public void setRoles(List<RoleDto> roles) {
         this.roles = roles;
     }
 

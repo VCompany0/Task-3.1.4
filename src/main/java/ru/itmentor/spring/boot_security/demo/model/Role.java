@@ -1,8 +1,8 @@
-package ru.itmentor.spring.boot_security.demo.role;
+package ru.itmentor.spring.boot_security.demo.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
-import ru.itmentor.spring.boot_security.demo.user.User;
+import ru.itmentor.spring.boot_security.demo.dto.RoleDto;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,8 +28,8 @@ public class Role implements GrantedAuthority {
         this.role = role;
     }
 
-    public Role(RoleEnum roleEnum) {
-        this.role = roleEnum.name();
+    public Role(RoleDto roleDto) {
+        this.role = roleDto.name();
     }
 
 

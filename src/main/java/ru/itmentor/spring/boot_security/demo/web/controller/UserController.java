@@ -6,24 +6,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itmentor.spring.boot_security.demo.repositories.RoleRepository;
+import ru.itmentor.spring.boot_security.demo.dto.UserDto;
 import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
-import ru.itmentor.spring.boot_security.demo.user.UserDto;
 
 @RestController
 public class UserController {
 
     private UserRepository userRepository;
-    private RoleRepository roleRepository;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
-
-    @Autowired
-    public void setRoleRepository(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
     }
 
     @GetMapping(value = "/user/current_user")

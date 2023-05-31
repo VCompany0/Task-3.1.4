@@ -1,4 +1,4 @@
-package ru.itmentor.spring.boot_security.demo.service;
+package ru.itmentor.spring.boot_security.demo.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,10 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.itmentor.spring.boot_security.demo.repositories.RoleRepository;
 import ru.itmentor.spring.boot_security.demo.repositories.UserRepository;
-import ru.itmentor.spring.boot_security.demo.user.User;
-import ru.itmentor.spring.boot_security.demo.user.UserDto;
-
-import java.util.Optional;
+import ru.itmentor.spring.boot_security.demo.model.User;
 
 
 @Service
